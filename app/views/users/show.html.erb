@@ -10,5 +10,33 @@
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
     </div>
+
+    <% if @user.id != current_user.id %>
+    <%# 相互フォローしていることが条件 %>
+     <% if current_user.following?(@user) && @user.following?(current_user) %>
+     <%# 既にroomがある場合（以前にDMのやりとりしている） %>
+    <% if @isRoom == true %>
+      <%# そのroomに入る %>
+      <%= link_to room_path(@roomId) do %>
+      <i class="fas fa-envelope"></i>
+      <% end %>
+
+      <%# roomがない場合（新規のDM） %>
+      <% else %>
+      <%# RoomとEntry2つのモデルにデータを送る %>
+      <%= form_with model: @room, local: true do |f| %>
+        <%= fields_for @entry do |e| %>
+          <%# Entryにはuser_idを送る必要があるため、@user.idを指定 %>
+          <%= e.hidden_field :user_id, value: @user.id %>
+        <% end %>
+        <%# 今回はリンクにアイコン使用のためbutton_tagを使用。通常であればf.submitでOK %>
+        <%= button_tag type: 'submit' do %>
+          <i class="fas fa-envelope"></i>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
   </div>
 </div>
