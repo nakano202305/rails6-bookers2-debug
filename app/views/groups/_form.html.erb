@@ -1,0 +1,25 @@
+<%= form_with model: group, local: :true do |f| %>
+  <div class= "form-group">
+    <%= f.label :グループ名 %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  
+  <div class= "form_group">
+    <%= f.label :introduction, "紹介文" %>
+    <%= f.text_area :introduction, class: "form-control" %>
+  </div>
+  
+  <div class= "form-group">
+    <%= f.label :image, "グループ画像" %>
+    <%= f.file_field :image, class: "form-control-file" %>
+  </div>
+  
+  <div class= "form-group">
+    <%= f.label :book_id %>
+    <%= f.collection_select :book_id, current_user.books, :id, :title, { include_blank: "--select--" }, { class: 'form-control' } %>
+  </div>
+  
+  <div class= "form-group">
+    <%= f.submit class: 'btn btn-info' %>
+  </div>
+<%end%>

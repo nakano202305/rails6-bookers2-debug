@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
   has_many :books, dependent: :destroy
+
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
   has_many :messages, dependent: :destroy
@@ -16,8 +17,13 @@ class User < ApplicationRecord
   has_many :user_rooms
   has_many :chats
   has_many :rooms, through: :user_rooms
-  has_many :group_users, dependent: :destroy
-  has_many :groups, dependent: :destroy
+  
+  
+  #to_groups
+  has_many :groups
+  #to_group_users
+  has_many :group_users
+  has_many :join_groups, through: :group_users, source: :group
 
 
   # フォローをした、されたの関係
@@ -58,5 +64,17 @@ class User < ApplicationRecord
       @user = User.all
     end
   end
-
+  
+  def join_group(group)
+    self.group_users.find_or_create_by(group_id: group.id)
+  end
+  
+  def exit_group(group)
+    group_user = self.group_users.find_by(group_id: group.id)
+    group_user.destroy if group_user
+  end
+  
+  def join_group?(group)
+    self.join_groups.include?(group)
+  end
 end
