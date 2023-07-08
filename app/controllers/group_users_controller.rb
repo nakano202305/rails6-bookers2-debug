@@ -12,8 +12,15 @@ class GroupUsersController < ApplicationController
   end
   
   def edit
+    @group = Group.find(params[:group_id])
   end
   
   def update
+    @group = Group.find(params[:group_id])
+    if @group.update(group_params)
+      redirect_to groups_path
+    else
+      render "edit"
+    end
   end
 end

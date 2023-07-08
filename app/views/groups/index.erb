@@ -21,7 +21,7 @@
         <tbody>
           <% @groups.each do |group| %>
             <tr>
-              <td><%= image_tag group.image if group.image.attached? %></td>
+              <td><%= image_tag group.image, size:'100x100' if group.image.attached? %></td>
               <td><%= link_to group.name, group %></td>
               <td><%= group.introduction %></td>
               <td><%= link_to group.book.title, group.book %></td>

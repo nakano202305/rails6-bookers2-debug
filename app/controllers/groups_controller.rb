@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
 
   def index
     @book = Book.new
-    @groups = current_user.groups
+    @groups = Group.all
   end
 
   def show
@@ -30,6 +30,7 @@ class GroupsController < ApplicationController
   end
 
   def update
+    @group = Group.find(params[:id])
     if @group.update(group_params)
       redirect_to groups_path
     else
@@ -44,10 +45,10 @@ class GroupsController < ApplicationController
     params.require(:group).permit(:name, :introduction, :image, :book_id)
   end
 
-  def ensure_corrent_user
+  def ensure_correct_user
     @group = Group.find(params[:id])
-    unless @group.owner_id == current_user.id
-      redirect_to group_path
+    unless @group.user_id == current_user.id
+      redirect_to groups_path
     end
   end
 end
