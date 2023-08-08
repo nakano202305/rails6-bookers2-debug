@@ -23,4 +23,5 @@ class GroupUsersController < ApplicationController
       render "edit"
     end
   end
+  
 end
