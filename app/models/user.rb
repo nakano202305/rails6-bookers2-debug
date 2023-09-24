@@ -77,4 +77,10 @@ class User < ApplicationRecord
   def join_group?(group)
     self.join_groups.include?(group)
   end
+  
+  # is_deletedがfalseならtrueを返すようにしている
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+  
 end

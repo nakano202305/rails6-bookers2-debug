@@ -17,6 +17,10 @@ Rails.application.routes.draw do
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
     get "search", to: "users#search"
+    # 退会確認画面
+    get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+    # 論理削除用のルーティング
+    patch '/users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
   end
 
   resources :messages, only: [:create]
