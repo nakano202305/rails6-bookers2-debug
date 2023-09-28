@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     # 退会確認画面
     get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
     # 論理削除用のルーティング
-    patch '/users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
+    patch '/users/:id/withdraw' => 'users#withdraw', as: 'withdraw'
   end
 
   resources :messages, only: [:create]
