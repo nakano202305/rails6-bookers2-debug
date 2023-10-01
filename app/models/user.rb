@@ -8,7 +8,7 @@ class User < ApplicationRecord
    validates :introduction, length: { maximum: 50 }
 
   has_one_attached :profile_image
-  has_many :books, dependent: :destroy 
+  has_many :books, dependent: :destroy
 
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
@@ -17,8 +17,8 @@ class User < ApplicationRecord
   has_many :user_rooms
   has_many :chats
   has_many :rooms, through: :user_rooms
-  
-  
+
+
   #to_groups
   has_many :groups
   #to_group_users
@@ -64,23 +64,23 @@ class User < ApplicationRecord
       @user = User.all
     end
   end
-  
+
   def join_group(group)
     self.group_users.find_or_create_by(group_id: group.id)
   end
-  
+
   def exit_group(group)
     group_user = self.group_users.find_by(group_id: group.id)
     group_user.destroy if group_user
   end
-  
+
   def join_group?(group)
     self.join_groups.include?(group)
   end
-  
-  # is_deletedがfalseならtrueを返すようにしている
-  # def active_for_authentication?
-  #   super && (is_deleted == false)
-  # end
-  
+
+  #is_deletedがfalseならtrueを返すようにしている
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+
 end
