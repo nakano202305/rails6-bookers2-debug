@@ -18,9 +18,9 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
     get "search", to: "users#search"
     # 退会確認画面
-    get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
-    # 論理削除用のルーティング
-    patch '/users/withdraw' => 'users#withdraw', as: 'withdraw'
+    # get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+    # # 論理削除用のルーティング
+    # patch '/users/withdraw' => 'users#withdraw', as: 'withdraw'
   end
 
   resources :messages, only: [:create]
@@ -30,8 +30,8 @@ Rails.application.routes.draw do
     resource :group_users, only: [:create, :destroy]
   end
   resources :group_users, only: [:edit, :update]
-  
-  
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 
