@@ -57,7 +57,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @books = @user.books
     @book = Book.new
     if params[:created_at] == ""

@@ -11,12 +11,12 @@
       <h2>Users</h2>
       <%= render 'index',users: @users %>
       
-      <%= form_with url: user_search_path(@users), method: :get do |f| %>
+      <%= form_with url: user_search_path(@users), method: :get, local: true do |f| %>
         <%= f.date_field :created_at %>
         <%= f.submit '検索', class: 'btn btn-primary'  %>
       <% end %>
 
-      <div id="search_result">
+      <div class="search_result">
         <% if @search_book.present? %>
           <%= render 'search', search_book: @search_book %>
         <% end %>
